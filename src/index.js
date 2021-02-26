@@ -1,46 +1,26 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
-/**
- * Display组件
- *  状态传递给子组件Demo
- * @param {Object} counter 
- */
-const Display = ({ counter }) => (
-  <div>
-    {counter}
-  </div>
-)
 
-/**
- * Button组件
- *  复用Text 以及 handleClick
- */
-const Button = ({ handleClick, text }) => (
-  <button onClick={handleClick}>
-    {text}
-  </button>
-)
 const App = () => {
-  const [counter, setA] = useState(0)
-  const handleClick = () => {
-    console.log("click.")
-    setA(counter + 1)
-  }
+    const [left, setLeft] = useState(0);
+    const [right, setRight] = useState(0);
 
 
-  return (
-    <div>
-      <Display counter={counter} />
-      <Button handleClick={handleClick} text="plus" />
-      <Button handleClick={() => { setA(0) }} text="clear" />
-    </div>
-  )
+    return (
+        <div>
+            {left}
+            <button onClick={() => setLeft(left + 1)}>left</button>
+
+            <button onClick={() => setRight(right + 1)}>right</button>
+            {right}
+        </div>
+    )
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<App/>, document.getElementById('root'))
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
