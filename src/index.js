@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
+const Display = props => <div>{props.value}</div>
+
 const Button = ({handleClick, text}) => (
     <button onClick={handleClick}>{text}</button>
 )
@@ -16,9 +18,7 @@ const App = () => {
     const setToValue = (newValue) => {
         setValue(newValue)
     }
-    // Do not define components inside another component
-    //最大的问题是React 在每次渲染时，会将内部的组件当作一个新的组件。这回导致React 无法去优化组件。
-    const Display = props => <div>{props.value}</div>
+
     return (
         <div>
             <Display value={value}/>
