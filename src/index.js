@@ -11,21 +11,17 @@ import reportWebVitals from './reportWebVitals';
  */
 const App = () => {
     const [value, setValue] = useState(10)
-
+    const hello = () => {
+        return () => {
+            console.log('hello world')
+            setValue(value + 1)
+        }
+    }
     return (
         <div>
             {value}
-            {/*事件处理被定义为function call，这意味着事件处理程序实际上被分配了函数返回的值，而 console.log 的返回值是undefined*/}
-            <button onClick={console.log('clicked the button')}>
-                button
-            </button>
-
-            <button onClick={() => {
-                console.log('clicked the button')
-                setValue(100)
-            }}>
-                button
-            </button>
+            {/*函数调用的返回值是函数,此时函数调用会起作用*/}
+            <button onClick={hello()}>button</button>
         </div>
     )
 }
