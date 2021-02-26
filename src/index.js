@@ -13,12 +13,15 @@ const Button = ({handleClick, text}) => (
  */
 const App = () => {
     const [value, setValue] = useState(10)
-    const setToValue = (newValue) => () => {
+    const setToValue = (newValue) => {
         setValue(newValue)
     }
+    // Do not define components inside another component
+    //最大的问题是React 在每次渲染时，会将内部的组件当作一个新的组件。这回导致React 无法去优化组件。
+    const Display = props => <div>{props.value}</div>
     return (
         <div>
-            {value}
+            <Display value={value}/>
             <Button handleClick={() => setToValue(1000)} text='thousand'/>
             <Button handleClick={() => setToValue(0)} text='reset'/>
             <Button handleClick={() => setToValue(value + 1)} text='increment'/>
