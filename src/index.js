@@ -3,8 +3,31 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
+/**
+ * Display组件
+ * 状态传递给子组件Demo
+ * @param {Object} props
+ */
+const Display = (props) => {
+  return (
+    <div>
+      {props.counter}
+    </div>
+  )
+}
 
-
+/**
+ * Button组件
+ *  复用Text 以及 handleClick
+ * @param {Object} props 
+ */
+const Button = (props) => {
+  return (
+    <button onClick={props.handleClick}>
+      {props.text}
+    </button>
+  )
+}
 const App = () => {
   const [counter, setA] = useState(0)
   const handleClick = () => {
@@ -15,15 +38,9 @@ const App = () => {
 
   return (
     <div>
-      <div>
-        {counter}
-      </div>
-      <button onClick={handleClick}>
-        plus
-      </button>
-      <button onClick={() => { setA(0) }}>
-        clear
-      </button>
+      <Display counter={counter} />
+      <Button handleClick={handleClick} text="plus" />
+      <Button handleClick={() => { setA(0) }} text="clear" />
     </div>
   )
 }
