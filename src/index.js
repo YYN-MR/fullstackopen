@@ -5,29 +5,24 @@ import reportWebVitals from './reportWebVitals';
 
 /**
  * Display组件
- * 状态传递给子组件Demo
- * @param {Object} props
+ *  状态传递给子组件Demo
+ * @param {Object} counter 
  */
-const Display = (props) => {
-  return (
-    <div>
-      {props.counter}
-    </div>
-  )
-}
+const Display = ({ counter }) => (
+  <div>
+    {counter}
+  </div>
+)
 
 /**
  * Button组件
  *  复用Text 以及 handleClick
- * @param {Object} props 
  */
-const Button = (props) => {
-  return (
-    <button onClick={props.handleClick}>
-      {props.text}
-    </button>
-  )
-}
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>
+    {text}
+  </button>
+)
 const App = () => {
   const [counter, setA] = useState(0)
   const handleClick = () => {
