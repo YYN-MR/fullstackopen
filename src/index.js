@@ -36,7 +36,14 @@ const Button = ({onClick, text}) => (
         {text}
     </button>
 )
-
+/**
+ * App 应用启动组件
+ *  Hook的规则
+ *      不能从循环、条件表达式或任何不是定义组件的函数的地方调用 useState （同样的还有 useEffect 函数）。
+ *   这样做是为了确保Hook总是以相同的顺序调用，如果不是这样，应用的行为就会不规则。
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const App = () => {
     const [clicks, setClicks] = useState({
         left: 0,
