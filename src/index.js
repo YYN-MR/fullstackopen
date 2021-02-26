@@ -3,6 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
+const History = ({allClicks}) => {
+    if (allClicks.length === 0) {
+        return (
+            <div>
+                the app is used by pressing the buttons
+            </div>
+        )
+    } else {
+        return (
+            <div>
+                button press history: {allClicks.join(' ')}
+            </div>
+        )
+    }
+}
 
 const App = () => {
     const [clicks, setClicks] = useState({
@@ -35,7 +50,7 @@ const App = () => {
             <button onClick={handleRightClick}>right</button>
             {clicks.right}
 
-            <p>{allClicks.join(' ')}</p>
+            <History allClicks={allClicks}/>
         </div>
     )
 }
