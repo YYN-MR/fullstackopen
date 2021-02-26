@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
-
+const Button = ({handleClick, text}) => (
+    <button onClick={handleClick}>{text}</button>
+)
 /**
  * App 应用启动组件
  * @returns {JSX.Element}
@@ -17,10 +19,9 @@ const App = () => {
     return (
         <div>
             {value}
-            {/*函数调用的返回值是函数,此时函数调用会起作用*/}
-            <button onClick={setToValue(1000)}>thousand</button>
-            <button onClick={setToValue(0)}>reset</button>
-            <button onClick={setToValue(value + 1)}>increment</button>
+            <Button handleClick={() => setToValue(1000)} text='thousand'/>
+            <Button handleClick={() => setToValue(0)} text='reset'/>
+            <Button handleClick={() => setToValue(value + 1)} text='increment'/>
         </div>
     )
 }
