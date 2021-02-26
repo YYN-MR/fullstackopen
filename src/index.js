@@ -3,6 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
+/**
+ * 历史记录组件
+ * @param allClicks 点击历史数据
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const History = ({allClicks}) => {
     if (allClicks.length === 0) {
         return (
@@ -18,6 +24,18 @@ const History = ({allClicks}) => {
         )
     }
 }
+/**
+ * Button 组件
+ * @param onClick
+ * @param text
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const Button = ({onClick, text}) => (
+    <button onClick={onClick}>
+        {text}
+    </button>
+)
 
 const App = () => {
     const [clicks, setClicks] = useState({
@@ -45,9 +63,8 @@ const App = () => {
     return (
         <div>
             {clicks.left}
-            <button onClick={handleLeftClick}>left</button>
-
-            <button onClick={handleRightClick}>right</button>
+            <Button text='left' onClick={handleLeftClick}/>
+            <Button text='right' onClick={handleRightClick}/>
             {clicks.right}
 
             <History allClicks={allClicks}/>
