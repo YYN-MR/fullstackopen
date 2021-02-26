@@ -3,96 +3,29 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
-/**
- * 历史记录组件
- * @param allClicks 点击历史数据
- * @returns {JSX.Element}
- * @constructor
- */
-const History = ({allClicks}) => {
-    if (allClicks.length === 0) {
-        return (
-            <div>
-                the app is used by pressing the buttons
-            </div>
-        )
-    } else {
-        return (
-            <div>
-                button press history: {allClicks.join(' ')}
-            </div>
-        )
-    }
-}
-/**
- * Button 组件
- * @param onClick
- * @param text
- * @returns {JSX.Element}
- * @constructor
- */
-const Button = ({onClick, text}) => (
-    <button onClick={onClick}>
-        {text}
-    </button>
-)
+
 /**
  * App 应用启动组件
- *  Hook的规则
- *      不能从循环、条件表达式或任何不是定义组件的函数的地方调用 useState （同样的还有 useEffect 函数）。
- *   这样做是为了确保Hook总是以相同的顺序调用，如果不是这样，应用的行为就会不规则。
  * @returns {JSX.Element}
  * @constructor
  */
 const App = () => {
-    const [clicks, setClicks] = useState({
-        left: 0,
-        right: 0
-    })
-
-    const [allClicks, setAll] = useState([])
-    // these are ok
-    const [age, setAge] = useState(0)
-    const [name, setName] = useState('Juha Tauriainen')
-
-    if ( age > 10 ) {
-        // this does not work!
-        const [foobar, setFoobar] = useState(null)
-    }
-
-    for ( let i = 0; i < age; i++ ) {
-        // also this is not good
-        const [rightWay, setRightWay] = useState(false)
-    }
-
-    const notGood = () => {
-        // and this is also illegal
-        const [x, setX] = useState(-1000)
-    }
-
-    const handleLeftClick = () => {
-        setClicks({
-            ...clicks,
-            left: clicks.left + 1
-        })
-        setAll(allClicks.concat('L'))
-    }
-    const handleRightClick = () => {
-        setClicks({
-            ...clicks,
-            right: clicks.right + 1
-        })
-        setAll(allClicks.concat('R'))
-    }
+    const [value, setValue] = useState(10)
 
     return (
         <div>
-            {clicks.left}
-            <Button text='left' onClick={handleLeftClick}/>
-            <Button text='right' onClick={handleRightClick}/>
-            {clicks.right}
+            {value}
+            {/*事件处理被定义为function call，这意味着事件处理程序实际上被分配了函数返回的值，而 console.log 的返回值是undefined*/}
+            <button onClick={console.log('clicked the button')}>
+                button
+            </button>
 
-            <History allClicks={allClicks}/>
+            <button onClick={() => {
+                console.log('clicked the button')
+                setValue(100)
+            }}>
+                button
+            </button>
         </div>
     )
 }
