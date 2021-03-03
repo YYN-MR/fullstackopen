@@ -5,7 +5,12 @@ const App = (props) => {
     // eslint-disable-next-line no-unused-vars
     const [notes, setNotes] = useState(props.notes)
 
-    const [newNote, setNewNote] = useState('a new note...')
+    const [newNote, setNewNote] = useState('')
+
+    const [showAll, setShowAll] = useState(true)
+
+    const notesToShow = showAll ? notes : notes.filter(note => note.important)
+
 
     const addNote = (event) => {
         event.preventDefault()
@@ -29,8 +34,13 @@ const App = (props) => {
             <h1>
                 Notes
             </h1>
+            <div>
+                <button onClick={() => setShowAll(!showAll)}>
+                    show {showAll ? 'important' : 'all'}
+                </button>
+            </div>
             <ul>
-                {notes.map(note => (
+                {notesToShow.map(note => (
                     <Note key={note.id} note={note}/>
                 ))}
             </ul>
