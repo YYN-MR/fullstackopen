@@ -1,9 +1,10 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Note from "./components/Note"
+import axios from "axios";
 
-const App = (props) => {
+const App = () => {
     // eslint-disable-next-line no-unused-vars
-    const [notes, setNotes] = useState(props.notes)
+    const [notes, setNotes] = useState([])
 
     const [newNote, setNewNote] = useState('')
 
@@ -11,6 +12,16 @@ const App = (props) => {
 
     const notesToShow = showAll ? notes : notes.filter(note => note.important)
 
+    useEffect(() => {
+        console.log('effect...')
+        axios
+            .get('http://localhost:3001/notes')
+            .then((response) => {
+                console.log('promise result.')
+                setNotes(response.data)
+            })
+    }, [])
+    console.log('render', notes.length, 'notes')
 
     const addNote = (event) => {
         event.preventDefault()
